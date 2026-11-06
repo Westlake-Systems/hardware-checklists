@@ -45,7 +45,7 @@ Start the first sections early in the design. The later ones fill in as the prod
 - [ ] **3.7** Products with a large battery or other high-power source have suitable enclosure materials and protective circuits.
 - [ ] **3.8** Rechargeable products in the EU common charger categories, such as phones, headphones, and keyboards, charge through USB-C.
 - [ ] **3.9** Products with batteries are checked against each market's battery rules, such as EU labeling, producer registration, and batteries the end user can remove and replace.
-  The EU removal and replacement rules apply from 18 February 2027 and shape the enclosure design. Exemptions and their conditions are still changing.
+  The EU removal and replacement rules apply from 18 February 2027 and shape the enclosure design. The exemptions are narrow.
 - [ ] **3.10** The enclosure has room for the required labels and marks.
 - [ ] **3.11** Connected products meet each market's security rules, such as no universal default passwords, a way to report vulnerabilities, a stated support period, and secure updates.
   The rules state outcomes; secure boot, locked debug, and protected keys are the usual ways to meet them.
@@ -113,6 +113,7 @@ Start the first sections early in the design. The later ones fill in as the prod
 - [Plan for compliance from day one](https://westlakesys.com/articles/compliance-from-day-one/)
 - [Compliance by market: the approvals your product needs](https://westlakesys.com/articles/compliance-by-market/)
 - [Compliance planner](https://westlakesys.com/tools/compliance-planner/)
+- [Replaceable batteries in the EU: what changes on 18 February 2027](https://westlakesys.com/articles/eu-replaceable-batteries/)
 - [EMC pre-scan checklist](https://westlakesys.com/tools/checklists/emc-pre-scan/)
 - Next step: [Release to manufacturing checklist](manufacturing-release.md)
 
