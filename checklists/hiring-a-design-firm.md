@@ -66,6 +66,7 @@ Ask every firm on your shortlist the same questions, and get the answers in writ
 
 ## Related reading
 
+- [Checklist for choosing a contract manufacturer](https://westlakesys.com/tools/checklists/choosing-a-contract-manufacturer/)
 - [From prototype to production: EVT, DVT, and PVT explained](https://westlakesys.com/articles/prototype-to-production/)
 - [Does your hardware company need a fractional CTO?](https://westlakesys.com/articles/fractional-cto/)
 - [What a complete manufacturing package includes](https://westlakesys.com/articles/manufacturing-package/)
