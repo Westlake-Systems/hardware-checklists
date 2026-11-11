@@ -19,6 +19,19 @@ These are the checks Westlake Systems works through on its own projects, plus a 
 - [Compliance readiness checklist](checklists/compliance-readiness.md): What to settle before you book a compliance test lab: markets and standards, radio approach, design checks, pre-scans, test modes, samples, and paperwork.
 <!-- checklists:end -->
 
+## Related reading
+
+Articles on westlakesys.com that go with the checklists:
+
+- [Why UWB range falls short of the datasheet](https://westlakesys.com/articles/uwb-range/)
+- [Adding a PA or an LNA to a UWB design](https://westlakesys.com/articles/uwb-pa-lna/)
+- [UWB antenna delay calibration: what it is and how to do it](https://westlakesys.com/articles/uwb-antenna-delay/)
+- [Good return loss, poor ranging: group delay in UWB antennas](https://westlakesys.com/articles/uwb-group-delay/)
+- [UWB transmit power: what the limits actually say](https://westlakesys.com/articles/uwb-transmit-power-limits/)
+- [An AI tool designed your board. What to check before you order it](https://westlakesys.com/articles/ai-designed-board-before-you-order/)
+- [What I look for in a hardware design review](https://westlakesys.com/articles/design-review/)
+- [More articles](https://westlakesys.com/articles/)
+
 ## Using them
 
 The files are plain Markdown with GitHub task lists, so you can copy a checklist into an issue, a pull request, or your own project docs and tick items off there.
