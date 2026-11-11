@@ -79,6 +79,7 @@ Measure in the enclosure, with the battery, cables, and display in place, and wi
 - [Choosing a radio: matching the wireless technology to the product](https://westlakesys.com/articles/choosing-a-radio/)
 - [Module or chip-down: making the radio decision](https://westlakesys.com/articles/module-or-chip-down/)
 - [Radio range estimator](https://westlakesys.com/tools/radio-range/)
+- [UWB design review checklist](https://westlakesys.com/tools/checklists/uwb-design-review/)
 - Next step: [EMC pre-scan checklist](emc-pre-scan.md)
 
 ---

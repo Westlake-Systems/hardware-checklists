@@ -85,7 +85,7 @@ Small teams often merge stages or use a pilot run in place of PVT. That works if
 - [Checklist for choosing a contract manufacturer](https://westlakesys.com/tools/checklists/choosing-a-contract-manufacturer/)
 - [From prototype to production: EVT, DVT, and PVT explained](https://westlakesys.com/articles/prototype-to-production/)
 - [Designing for production test](https://westlakesys.com/articles/designing-for-production-test/)
-- [What a complete manufacturing package includes](https://westlakesys.com/articles/manufacturing-package/)
+- [The last 20 percent of a hardware product](https://westlakesys.com/articles/last-20-percent/)
 - Next step: [Release to manufacturing checklist](manufacturing-release.md)
 
 ---
