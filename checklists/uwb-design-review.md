@@ -28,6 +28,7 @@ It adds to the schematic and layout review and the antenna and RF integration ch
 - [ ] **2.3** The link budget respects both the average power density limit and the peak limit, as radiated power.
 - [ ] **2.4** If the channel overlaps 6 GHz Wi-Fi, interference in both directions has been considered.
 - [ ] **2.5** The approval route is chosen: a certified module used exactly as its approval allows, or a chip-down radio with full radio testing.
+- [ ] **2.6** A device used under the US handheld rules stops transmitting within 10 seconds when it hears no acknowledgment from its receiver.
 
 ## 3. Link budget
 

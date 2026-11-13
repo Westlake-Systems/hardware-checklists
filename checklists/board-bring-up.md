@@ -20,6 +20,8 @@ Do the first section before the boards arrive. After that, work in order and kee
 - [ ] **1.6** Expected current and resistance to ground are noted for each rail, so an abnormal reading stands out.
 - [ ] **1.7** A harness or breakout that reaches every interface is built.
 - [ ] **1.8** A log is set up for each board serial number: measurements, issues, and rework.
+- [ ] **1.9** The hardware values the firmware relies on, such as sense resistors, divider ratios, gains, the ADC reference, and signal polarities, are checked against the BOM and schematic.
+  A correct board with a wrong constant in firmware reads wrong currents and temperatures, or flips a sign.
 
 ## 2. Inspection
 
@@ -42,6 +44,12 @@ Do the first section before the boards arrive. After that, work in order and kee
 - [ ] **3.7** Ripple and noise are measured on each rail with a short ground connection at the probe tip.
   A long ground lead picks up switching noise that is not on the rail.
 - [ ] **3.8** The board starts reliably over many power cycles, with both fast and slow supply ramps.
+- [ ] **3.9** The board runs at the lowest input voltage with its peak load, such as a radio burst or a motor start, and no rail drops out or cycles off and on.
+- [ ] **3.10** With each switchable supply domain turned off in turn and the rest running, the off rail stays near zero.
+  A rail that floats up is being fed through I/O pins, pull-ups, or protection diodes.
+- [ ] **3.11** Boards and sections that power up separately are started in every order, and none is upset by another that is still in reset or booting.
+  Floating chip selects and stray UART bytes at boot can corrupt a part that is already running.
+- [ ] **3.12** Every combination of power sources and connected hosts is tried together, such as USB, an adapter, the battery, and the debug probe, and no current flows back into any of them.
 
 ## 4. Clocks and reset
 
@@ -49,6 +57,8 @@ Do the first section before the boards arrive. After that, work in order and kee
 - [ ] **4.2** Every oscillator runs at the right frequency, measured at a clock-output pin or buffered test point.
 - [ ] **4.3** Boot and strap pins are at their intended levels when reset releases.
 - [ ] **4.4** A supply that sags slowly or drops quickly causes a clean reset and recovery.
+- [ ] **4.5** The board restarts from a watchdog or software reset, not only from a power cycle, including any boot from external flash.
+  A flash left in quad, continuous-read, or 4-byte address mode can ignore the boot ROM after a reset, and the board then hangs until power is cycled.
 
 ## 5. Programming and debug
 
@@ -57,6 +67,8 @@ Do the first section before the boards arrive. After that, work in order and kee
   Check that read protection or debug lock was not set by accident.
 - [ ] **5.3** Firmware reads the board revision correctly.
 - [ ] **5.4** The board recovers from an interrupted or bad firmware load.
+- [ ] **5.5** The board powers up and can be programmed with every programmable part blank, and no blank or held-in-reset part holds another part's reset, boot, or configuration pin.
+  An unprogrammed processor holding an FPGA's configuration pin low makes the board look dead, or depend on firmware nobody listed.
 
 ## 6. Peripherals
 
@@ -69,6 +81,11 @@ Do the first section before the boards arrive. After that, work in order and kee
 - [ ] **6.5** Analog inputs are checked for noise, offset, and gain against a known reference.
 - [ ] **6.6** Every connector is exercised with the real cable or mating hardware, including hot-plug where the product allows it.
 - [ ] **6.7** Buttons, LEDs, displays, sensors, and actuators work, with motors tested under load.
+- [ ] **6.8** Each sensor is disconnected and shorted in turn, and firmware reports a fault rather than a plausible reading.
+  A missing temperature sensor that reads as cold can leave a heater or charger running.
+- [ ] **6.9** Each output that powers an external device is shorted, and the board limits the current, survives, and recovers as designed.
+- [ ] **6.10** Outputs that control loads are captured on a scope through power-up and power-down, and stay in their safe state throughout.
+- [ ] **6.11** Charging is tried first with no cell, then with a simulated cell, then at the temperature cutoff, before a real cell is charged with someone watching.
 
 ## 7. RF
 
@@ -89,6 +106,10 @@ Do the first section before the boards arrive. After that, work in order and kee
 - [ ] **8.4** Any gap between measurement and budget is traced: pull-ups, floating inputs, back-powered chips, LEDs.
 - [ ] **8.5** Long captures include rare events such as reconnects, retries, and update checks.
   Rare events can dominate the average current.
+- [ ] **8.6** Current in ship or storage mode is measured, and is low enough that the cell stays above its protection cutoff for the longest expected time on a shelf.
+  A deeply discharged lithium cell may not recharge, or may be unsafe to recharge.
+- [ ] **8.7** A coin cell or other primary cell holds its voltage under the product's peak current at the coldest operating temperature.
+  Coin cells have a high internal resistance, so a short burst can pull them below brown-out long before they are empty.
 
 ## 9. Early compliance checks
 

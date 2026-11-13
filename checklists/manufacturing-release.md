@@ -18,6 +18,9 @@ Use it before the first prototype order as well as the production release; most 
 - [ ] **1.5** The fabrication drawing states material, finish, mask and silkscreen colors, IPC-6012 or IPC-6013 class, outline tolerances, and special features.
 - [ ] **1.6** An IPC-D-356 test netlist is included if you send Gerbers.
 - [ ] **1.7** Panel requirements say who designs the panel, with fiducials, tooling holes, and tabs or V-score.
+- [ ] **1.8** Annular rings and solder mask webs are checked against the fab's real process: the drill it will use, which is larger than the finished hole, and its minimum web for the chosen mask color.
+  A web too narrow to make is often removed by the fab, and solder can then bridge the pads.
+- [ ] **1.9** The surface finish suits the parts, with a flat finish for fine-pitch and bottom-terminated parts, and its shelf life covers the time between fabrication and assembly.
 
 ## 2. Bill of materials
 
@@ -31,6 +34,12 @@ Use it before the first prototype order as well as the production release; most 
 - [ ] **2.5** Parts with no schematic symbol are in the BOM: labels, gaskets, light pipes, screws, and standoffs.
   Nobody draws them on the schematic, so they are easy to leave out.
 - [ ] **2.6** Moisture-sensitive parts are identified so the assembler handles them correctly.
+- [ ] **2.7** Each manufacturer part number is decoded against the maker's ordering code and matches the value field and the circuit: voltage, tolerance, dielectric, fixed or adjustable output, address option, temperature grade, and packaging.
+  A 16 V Y5V capacitor, or an adjustable regulator with no divider, can hide behind a value field that looks right.
+- [ ] **2.8** Lines open to equivalents state what a substitute must match, such as power or pulse rating, or low ESR, and lines that must not be substituted are marked.
+- [ ] **2.9** No line uses a pre-production, sample, or not-yet-released part number.
+- [ ] **2.10** Where the errata differ by silicon revision, the BOM states the revision or ordering option the design needs, and first articles are checked for it.
+  Older silicon still in stock can bring back a problem the design worked around.
 
 ## 3. Assembly data
 
@@ -42,6 +51,9 @@ Use it before the first prototype order as well as the production release; most 
 - [ ] **3.5** The assembly drawing shows polarity, pin 1, hand-soldered parts, adhesive, coating keep-outs, and heat sinks.
 - [ ] **3.6** Parts whose pin 1 or polarity marking varies between vendors have explicit orientation notes.
 - [ ] **3.7** Lead-free or leaded assembly and the IPC-A-610 acceptance class are stated.
+- [ ] **3.8** Every part can take the assembler's reflow peak for each pass it will see, and parts that cannot, such as some connectors, crystals, modules, and plastic parts, are marked for hand or selective soldering.
+- [ ] **3.9** When the assembler uses its own part library, the placement file is checked against its rotation and origin conventions, polarized parts first.
+  Rotation conventions differ between CAD libraries and assemblers, so a part can end up turned 90 or 180 degrees.
 
 ## 4. Design reference
 
@@ -75,6 +87,8 @@ Use it before the first prototype order as well as the production release; most 
 - [ ] **7.4** Test time per unit is estimated and fits the line rate.
   A slow test station becomes the bottleneck for the whole line.
 - [ ] **7.5** Failed units have a defined path: retest, repair, scrap, and how results are logged.
+- [ ] **7.6** Test pads meet the fixture maker's rules for size, spacing, and distance from the edge, with the finish and paste the fixture maker asks for, and the board or panel has tooling holes the fixture can locate on.
+- [ ] **7.7** The test fixture can put a unit into its test mode without a debugger, and that mode is locked or removed in shipping firmware.
 
 ## 8. Labels and packaging
 
@@ -92,6 +106,10 @@ Use it before the first prototype order as well as the production release; most 
 - [ ] **9.4** Design and electrical rule checks pass on the released revision.
 - [ ] **9.5** The released set is read-only, and any change is a new revision with a note on what changed.
 - [ ] **9.6** The engineering change order process is agreed with the manufacturer: what changed, why, which units, and what happens to stock.
+- [ ] **9.7** Copper pours are refilled and the design rule check rerun after the last edit, and the exported files are checked in a viewer other than the CAD tool.
+  The fab builds from the exported files, not the design, so a stale pour or a missing layer shows up only there.
+- [ ] **9.8** Every net class and custom design rule still matches the nets it was written for, after any nets were renamed.
+  A rule keyed to an old net name stops applying, with no error.
 
 ## 10. Before the build
 

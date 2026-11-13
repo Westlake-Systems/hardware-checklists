@@ -17,6 +17,8 @@ Choose early if you can. A manufacturer chosen before EVT can review the design 
 - [ ] **1.4** The quote package is complete and at one revision, with the BOM, board data, assembly drawing, and quantities, and every manufacturer gets the same package.
   Quotes from an incomplete package carry hidden assumptions, and two manufacturers end up quoting different products.
 - [ ] **1.5** An NDA is in place before the package goes out, and it covers anyone the manufacturer shares it with.
+- [ ] **1.6** Your cost estimate includes each connector's mating half, cable or harness, and any tooling they need, with their lead times.
+  They are often among the most expensive and slowest parts to get, and the easiest to leave out.
 
 ## 2. Fit
 
@@ -66,6 +68,8 @@ Choose early if you can. A manufacturer chosen before EVT can review the design 
 - [ ] **6.3** Test results are logged for every serial number, you get the logs, and every build comes with a yield and defect report.
   When yield drops or a unit comes back from the field, those records are how you find out why.
 - [ ] **6.4** Failed units have an agreed path: who analyzes them, who pays for repair or scrap, and how corrective actions are reported.
+- [ ] **6.5** The flux and cleaning process are agreed, no-clean or washed, and suit any conformal coating and high-impedance circuits on the board.
+  Residue left under voltage and humidity can grow conductive paths that leak or short.
 
 ## 7. Ownership and terms
 

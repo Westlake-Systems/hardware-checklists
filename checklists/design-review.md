@@ -35,6 +35,22 @@ Not every item applies to every board, so skip what does not fit, but decide tha
 - [ ] **2.9** For battery products, the quiescent current of every rail and the sleep current fit the power budget.
 - [ ] **2.10** A rechargeable cell's charge voltage, current, and temperature limits are set for that cell, with protection against overcharge, overdischarge, and short circuit.
   Charging outside the temperature range the cell allows is a common cause of damaged cells.
+- [ ] **2.11** The enable chain has no loop: every enable comes from a signal that is valid in every state, and the processor's own supply starts without any setup from the processor.
+  A regulator that needs I2C setup before it starts cannot power the processor that would set it up.
+- [ ] **2.12** At the lowest source voltage and full load, after every drop along the input path, each regulator's input stays above its dropout and undervoltage lockout, and the source can supply the current.
+  Current rises as the voltage falls, and a load step that drops the input by more than the lockout hysteresis makes a low battery switch the rail off and on.
+- [ ] **2.13** Where more than one source can power the product, such as USB, an adapter, a battery, or a debug probe, the sources are combined on purpose, and none can feed current back into another or into a host.
+  An LDO whose output can sit above its input, unless it blocks reverse current itself, or a converter switched off with its output held up, needs reverse-current blocking.
+- [ ] **2.14** An LC or ferrite filter ahead of a switching regulator is damped, so it cannot resonate with the regulator's negative input impedance.
+  An undamped input filter can make an otherwise stable regulator oscillate.
+- [ ] **2.15** Each regulator and load switch has a known response to overload and overheating, such as hiccup, latch, or foldback, the loads tolerate it, how a latched fault is cleared is defined, and the part stays inside its safe operating area while it retries.
+  Safe operating area shrinks with temperature and pulse length, so a retry that is safe once can overheat a part when it repeats.
+- [ ] **2.16** Tantalum capacitors are derated in voltage as their maker recommends and protected from surge current, and no polarized capacitor is reverse-biased in any power state.
+  Manganese dioxide tantalum capacitors fail short and can burn, and surge and overvoltage are the usual cause.
+- [ ] **2.17** A product that runs while it charges has a power path, or a charger the running load cannot confuse, so the battery still charges and the charge ends correctly.
+  Without a power path, the load current looks like a battery that never fills, and the charger can time out or never finish.
+- [ ] **2.18** Each switching regulator meets its minimum on-time and off-time at the highest and lowest input voltage and the chosen switching frequency.
+  A high input stepped down to a low output at a high frequency can need a pulse shorter than the part can make, so it skips pulses and the ripple grows.
 
 ## 3. Schematic and parts
 
@@ -51,6 +67,20 @@ Not every item applies to every board, so skip what does not fit, but decide tha
 - [ ] **3.8** Dividers, references, and analog gain stages are calculated with component tolerances, and stay in range at the extremes.
 - [ ] **3.9** The electrical rule check is clean, each remaining warning is explained, and net names are checked for accidental merges and splits.
   Two labels on one net, or a typo that splits a net, passes most electrical rule checks.
+- [ ] **3.10** The errata for each complex part, such as a processor, FPGA, PHY, power management IC, or radio, are read for the silicon revision being bought, and every advisory that affects the board has a recorded decision.
+  Errata can call for a pull-up, a series resistor, or a sequencing rule that the datasheet never mentions.
+- [ ] **3.11** Every output that controls a load, such as a FET gate, a driver enable, a DAC, or an isolator, holds a safe state from power-up until firmware takes over, including any glitch the pin is known to have at power-up.
+  DACs and isolators set their power-up and loss-of-supply states by part number or pin, and a gate with no pull-down floats until it is driven.
+- [ ] **3.12** Strap, boot, and reset pins that reach a connector, button, or debug header cannot be pulled to the wrong level during reset by whatever is attached, including a button the enclosure presses.
+  A button held down by a tight case keeps the board in reset or in its bootloader, and looks like a dead board.
+- [ ] **3.13** Relays, solenoids, and motor coils have a flyback diode or clamp rated for the coil current, at the coil or at the connector when the coil is off the board.
+  The turn-off spike can destroy the driver, and on a cable it also radiates.
+- [ ] **3.14** Every amplifier and comparator input has a DC path for its bias current, and each amplifier is stable with its real load, such as a cable, an ADC input, or a large capacitor.
+  Capacitance at the output can make a stage ring or oscillate in the product even though it looked fine on the bench; an isolation resistor usually fixes it.
+- [ ] **3.15** Each ADC input settles to the needed accuracy within the acquisition time, and noise above half the sample rate is filtered before the converter.
+  The small RC at the input that supplies the ADC's sampling charge is usually far too fast to count as the anti-aliasing filter.
+- [ ] **3.16** Current-sense shunts give a usable signal at the smallest current to be measured and stay in range at the largest, with Kelvin connections taken from the shunt's own pads.
+  Sensing from the copper that carries the current adds its resistance to the reading, so the result changes with layout and load.
 
 ## 4. Protection and connectors
 
@@ -61,6 +91,12 @@ Not every item applies to every board, so skip what does not fit, but decide tha
 - [ ] **4.4** Connector current ratings cover the worst-case load, with enough ground pins for fast signals.
   Derate for pins carrying current side by side, and for temperature.
 - [ ] **4.5** Outputs that power external devices have a fuse or current limit, and a defined behavior when shorted.
+- [ ] **4.6** Every external connector pin survives, or a fuse opens first, at the highest voltage that a foreseeable wiring mistake or a short to a neighboring pin can put on it, whether the circuit behind it is on or off.
+  A series resistor ahead of an input keeps the current through its protection diodes inside the datasheet limit, and a foreign supply on an output that is switched off can still feed back through its body diode.
+- [ ] **4.7** Nothing crosses an isolation barrier except the parts listed as bridging it: no net, pour, mounting hole, test point ground, or cable shield.
+  One screw or probe ground on the wrong side defeats the isolation without any warning in the schematic.
+- [ ] **4.8** Connectors that look alike or take the same cable cannot be swapped without harm, or are clearly marked.
+  Two identical headers side by side invite a swapped cable, which keying within each connector does not prevent.
 
 ## 5. Clocks and signals
 
@@ -73,6 +109,10 @@ Not every item applies to every board, so skip what does not fit, but decide tha
   Drive-strength settings and series resistors both slow edges that would otherwise ring and radiate.
 - [ ] **5.5** Controlled-impedance nets and differential pairs are marked in the schematic, with target impedance and polarity.
 - [ ] **5.6** Sensitive analog inputs and references are filtered and kept away from noisy circuits.
+- [ ] **5.7** Synchronous interfaces such as SPI and parallel memory have a worst-case setup and hold budget at the real clock rate, including the delay through any level shifter, isolator, or buffer.
+  A read through an isolator pays its delay twice, once out and once back.
+- [ ] **5.8** Signals that leave the board are checked at the real cable length for capacitance and edge rate, and bus cables such as RS-485 and CAN are terminated at the two ends of the trunk only, with a defined idle state.
+  A node that carries its own terminator takes it away when it is unplugged.
 
 ## 6. RF and antenna
 
@@ -115,6 +155,8 @@ Not every item applies to every board, so skip what does not fit, but decide tha
   A single large paste opening can float the part and leave the edge pins open.
 - [ ] **9.3** Hot parts are kept away from crystals, batteries, electrolytic capacitors, and sensors.
 - [ ] **9.4** The heat path works in the closed enclosure, not just on an open bench.
+- [ ] **9.5** Junction temperatures from theta-JA are trusted only when the board resembles the datasheet's test board; otherwise the estimate uses this board's own copper, vias, and planes.
+  Most of the heat leaves through the test board, so a smaller board or one with less copper runs hotter than theta-JA predicts.
 
 ## 10. DFM and assembly
 
@@ -126,6 +168,8 @@ Not every item applies to every board, so skip what does not fit, but decide tha
 - [ ] **10.4** Spacing allows for placement, inspection, rework, and mating connectors and cables.
 - [ ] **10.5** Vias in pads are filled and capped, or kept off pads so solder does not wick away.
 - [ ] **10.6** Panel rails, tabs, or V-scores are clear of parts and edge connectors, and agreed with the assembler.
+- [ ] **10.7** Ceramic capacitors and BGAs are kept away from board edges, break-off tabs, V-scores, mounting holes, and connectors that flex the board, or are turned to reduce the strain.
+  A flex crack in a capacitor can pass test and turn into a short later.
 
 ## 11. Test and bring-up access
 

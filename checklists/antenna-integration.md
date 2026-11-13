@@ -15,6 +15,8 @@ Measure in the enclosure, with the battery, cables, and display in place, and wi
   The radio range estimator in Tools does the arithmetic.
 - [ ] **1.3** Bands, channels, and power limits are set for every market the product will ship to.
 - [ ] **1.4** The approval route is chosen: a certified module used exactly as its grant allows, or a chip-down radio with full radio testing.
+- [ ] **1.5** Transmit power is checked as radiated power in the antenna's strongest direction, conducted power plus peak gain minus losses, against each market's limit.
+  An antenna with a strong peak in one direction lowers the conducted power you can use.
 
 ## 2. Antenna choice
 
@@ -33,6 +35,7 @@ Measure in the enclosure, with the battery, cables, and display in place, and wi
   Some paints and platings contain metal and detune the antenna.
 - [ ] **3.4** How the product is held, worn, or mounted is accounted for, since a hand, a wrist, or a metal surface nearby shifts the tuning.
 - [ ] **3.5** Noisy circuits, such as switching regulators, clocks, displays, and camera interfaces, are kept away from the antenna and the RF path.
+- [ ] **3.6** The keep-out is drawn as a rule area in the layout on every affected layer, so a later copper pour or reroute cannot fill it.
 
 ## 4. Feed line and matching
 
@@ -44,6 +47,7 @@ Measure in the enclosure, with the battery, cables, and display in place, and wi
 - [ ] **4.5** The analyzer's reference plane is moved to the matching network, by calibrating at the end of the pigtail or with port extension, and the test cable is kept from becoming part of the antenna.
   On a small board, ferrites on the cable or a sleeve balun reduce the error.
 - [ ] **4.6** The tuning covers the whole band and holds across production part tolerances.
+- [ ] **4.7** An active antenna powered through its RF cable has a current limit, so a shorted cable cannot pull down the supply or burn out the bias inductor.
 
 ## 5. Conducted tests
 
@@ -66,6 +70,8 @@ Measure in the enclosure, with the battery, cables, and display in place, and wi
 - [ ] **7.3** A GNSS receiver is checked for desense from the other radios and from digital noise near its band.
   GNSS signals arrive below the thermal noise floor, so even small amounts of board noise cost sensitivity.
 - [ ] **7.4** Isolation between antennas for different radios is measured, and the antennas are separated or oriented to improve it.
+- [ ] **7.5** Op-amp and sensor amplifier inputs near the antenna or on cables have an RF filter, and their rejection of RF at the transmit frequency is looked up where the datasheet gives it, or tested.
+  Amplifier input stages rectify RF into a DC offset that looks like a measurement error and follows the radio's activity.
 
 ## 8. Production
 

@@ -16,6 +16,9 @@ Small teams often merge stages or use a pilot run in place of PVT. That works if
 - [ ] **1.4** If a contract manufacturer is chosen, it has reviewed the design for part choices, panelization, and test access.
   Their feedback is cheapest to act on before layout is settled.
 - [ ] **1.5** The boards have debug access, test points, and current-measurement points for bring-up, with room kept for production test points and a firmware test mode.
+- [ ] **1.6** A use profile is written down, covering hours of use, temperatures inside the enclosure, thermal cycles, humidity, vibration, and how often connectors are plugged, and life estimates and reliability tests are taken from it.
+- [ ] **1.7** The service life is stated, and every part that wears out, such as the battery, electrolytic capacitors, connectors, switches, relays, fans, and flash memory, is rated for it under the use profile.
+  An electrolytic capacitor beside a hot part, a counter written to flash every second, or a connector plugged in at every test station can wear out well inside the product's life.
 
 ## 2. Planning each build
 
@@ -36,6 +39,9 @@ Small teams often merge stages or use a pilot run in place of PVT. That works if
 - [ ] **3.5** Major bugs are fixed, or understood with a planned fix.
 - [ ] **3.6** The mechanical design is stable enough to order production tooling, after a manufacturability review with the toolmaker.
   Tooling takes weeks to build and several rounds of trial shots to adjust.
+- [ ] **3.7** A tolerance stack shows that connectors, buttons, light pipes, displays, and stacked boards fit their openings and mates at worst case, not only at nominal.
+  Stacking connectors are also checked for gender, mated height, and keying against a rotated or mirrored mate.
+- [ ] **3.8** Connectors that take mating force or cable pull are held by more than their solder joints, and cables soldered or plugged to the board have strain relief.
 
 ## 4. DVT build
 
@@ -56,6 +62,10 @@ Small teams often merge stages or use a pilot run in place of PVT. That works if
 - [ ] **5.6** Assembly defects from the build are reviewed with the assembler, and design-side causes are fixed.
 - [ ] **5.7** The design is frozen, and any change after this point goes through a written change process.
   Each change is checked against tooling, certification, and the factory instructions; late mechanical changes are kept steel-safe, so the toolmaker removes metal rather than adding it.
+- [ ] **5.8** Battery life still meets the requirement with the cell at its end-of-life capacity, after the charge cycles and temperatures of the use profile.
+  A lower charge voltage trades some runtime for a longer cycle life.
+- [ ] **5.9** In a sealed product every opening, including connectors mated and unmated, is covered by the sealing plan, and there is a plan for condensation, such as a membrane vent.
+  A sealed enclosure breathes as it heats and cools, so an ingress rating alone does not keep moisture out.
 
 ## 6. PVT build
 

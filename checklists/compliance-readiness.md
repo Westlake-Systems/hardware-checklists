@@ -19,6 +19,7 @@ Start the first sections early in the design. The later ones fill in as the prod
   A US applicant can act as its own FCC agent; ISED needs a Canadian representative only for applicants outside Canada.
 - [ ] **1.6** The chosen lab and certification body are confirmed as recognized for each market.
   Recognition can be withdrawn, so check it close to booking.
+- [ ] **1.7** Products powered from a vehicle are planned against the vehicle EMC, ESD, and supply transient standards, such as CISPR 25 and ISO 7637-2, which are harsher than the consumer ones.
 
 ## 2. Radio approach
 
@@ -31,6 +32,7 @@ Start the first sections early in the design. The later ones fill in as the prod
 - [ ] **2.5** RF exposure is assessed for how close the antenna sits to the user, and for radios that transmit at the same time.
   An antenna within 20 cm of the body can take a design outside a module grant that assumed more.
 - [ ] **2.6** Regional frequency plans, power limits, and airtime rules are reflected in the firmware and hardware variants.
+- [ ] **2.7** Users cannot change region, channel, power, or radar detection settings into a state outside the approval, through a menu, a configuration file, an update, or a debug port.
 
 ## 3. Design checks
 
@@ -49,6 +51,18 @@ Start the first sections early in the design. The later ones fill in as the prod
 - [ ] **3.10** The enclosure has room for the required labels and marks.
 - [ ] **3.11** Connected products meet each market's security rules, such as no universal default passwords, a way to report vulnerabilities, a stated support period, and secure updates.
   The rules state outcomes; secure boot, locked debug, and protected keys are the usual ways to meet them.
+- [ ] **3.12** ESD parts have a system-level (IEC 61000-4-2) rating at the port's target, not only an HBM rating, a working voltage above the normal signal, and a clamping voltage at the strike current below what the protected pin can take.
+  Where the clamping voltage is too high, a series resistor between the clamp and the pin limits what the pin sees.
+- [ ] **3.13** ESD clamps sit next to the connector, the signal runs through the clamp's pad with no stub or via ahead of it, and the clamp's ground pad has its own vias to the ground plane.
+  Any inductance between the connector, the clamp, and ground adds to the voltage the protected chip sees.
+- [ ] **3.14** Cable shields bond all the way around at the connector shell or chassis, not through a pigtail into circuit ground.
+  Even a short pigtail loses much of the shielding at high frequencies.
+- [ ] **3.15** In a metal enclosure, seams, vents, and other openings are short compared with the wavelength of the highest emission, and seams are bonded, gasketed, or closely fastened.
+  An opening's longest dimension, not its width, sets how well it shields; a slot leaks freely as it nears half a wavelength.
+- [ ] **3.16** Each isolation barrier is declared as functional or safety insulation, and the parts and spacing of a safety barrier are rated for the withstand test voltage the standard sets, not only the working voltage.
+- [ ] **3.17** Surfaces a user can touch stay within the safety standard's touch temperature limits for their material and contact time, at the highest ambient.
+- [ ] **3.18** Parts that can fail short across a battery or other high-current source, such as TVS diodes and large ceramic capacitors, have a fuse or current limit ahead of them.
+  A shorted capacitor across an unprotected battery can overheat and start a fire.
 
 ## 4. Pre-scans and freeze
 
@@ -75,6 +89,8 @@ Start the first sections early in the design. The later ones fill in as the prod
 - [ ] **6.2** Support equipment is packed: power supplies, cables, host or accessories, and any software the lab needs.
 - [ ] **6.3** Design documents are ready: block diagram, schematics, BOM, layout, antenna specification, and an operational description.
 - [ ] **6.4** The test plan is agreed with the lab, and the lab is booked well ahead.
+- [ ] **6.5** Lithium cells and packs have passed the transport tests needed to ship them, with the test summary on file before the first shipment.
+  The tests take weeks, and a custom pack needs its own tests, not only those of its cells.
 
 ## 7. Declarations and files
 

@@ -65,6 +65,11 @@ Bench readings are relative, not absolute. Compare them with the limit using a m
   Spread-spectrum clocking lowers peaks where the interfaces tolerate it.
 - [ ] **6.3** Each fix is checked for side effects on signal integrity, radio sensitivity, and power consumption.
 - [ ] **6.4** Every fix that works on the bench is carried into the schematic, layout, and BOM for the next spin.
+- [ ] **6.5** Ferrite beads and common-mode chokes are chosen from their impedance curves at the frequencies to suppress and at their real DC current, and checked for resonance with nearby capacitors.
+  Impedance falls with DC current and heat, so a bead picked by its 100 MHz figure alone can do nothing, or ring.
+- [ ] **6.6** An isolated converter's common-mode current is given a deliberate path back across the barrier, such as a capacitor rated for the barrier, rather than through the cables.
+- [ ] **6.7** Floating copper, spare cable conductors, and long stubs are removed or tied to ground.
+  Any conductor longer than about a twentieth of a wavelength at a problem frequency can radiate or pick up noise.
 
 ## 7. Before the lab
 
